@@ -7,5 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/recette")
+
 public class RecetteController {
 }
