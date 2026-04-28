@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Setter
@@ -34,5 +35,11 @@ public class Recette {
 
     @LastModifiedDate
     private LocalDateTime dateRecetteModifier;
+
+    @ManyToMany
+    @JoinTable(name = "recette_ingredient",
+            joinColumns = @JoinColumn(name = "recette_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private List<Ingredient> ingredients;
 
 }
