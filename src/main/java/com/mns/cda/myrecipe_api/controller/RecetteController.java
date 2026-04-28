@@ -17,14 +17,14 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/recette")
-@Tag(name ="Recette", description = "API de gestion des recettes")
+@Tag(name ="Recettes", description = "Gestion des recettes")
 public class RecetteController {
     
     private final RecetteDao recetteDao;
 
-    @GetMapping("/list")
+    @GetMapping("/liste")
     @Operation(summary = "Récupère la liste de toutes les recettes",
-            description = "Cette méthode permet de récupérer la liste de toutes les recettes présentes dans la base de données.")
+            description = "Récupère la liste de toutes les recettes présentes dans la base de données.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Liste des recettes récupérée avec succès")
     })
@@ -36,7 +36,7 @@ public class RecetteController {
     @Operation(summary = "Récupérer une recette par son ID",
             description = "Cette méthode permet de récupérer les informations d'une recette spécifique en utilisant son ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Recette récupéré avec succèes"),
+            @ApiResponse(responseCode = "200", description = "Recette récupéré avec succès"),
             @ApiResponse(responseCode = "404", description = "Recette non trouvée")
     })
     public ResponseEntity<Recette> getRecetteById(@PathVariable Integer id) {
