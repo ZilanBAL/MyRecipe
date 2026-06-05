@@ -26,7 +26,9 @@ jobs:
       #          ./mvnw test
 
       - name : Package application
-        run: ./mvnw clean package -DskipTests
+        run: |
+          chmod +x mvnw
+          ./mvnw clean package -DskipTests
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
