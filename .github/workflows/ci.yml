@@ -1,10 +1,9 @@
 name: Java CI
-
 on:
   push:
-    branches: [ "main"]
+    branches: [ "main" ]
   pull_request:
-    branches: ["main"]
+    branches: [ "main" ]
 
 jobs:
   build-test:
@@ -15,18 +14,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Java
-        uses: actions/checkout@v4
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 25
           cache: maven
 
-#      - name: Run tests
-#        run: |
-#          chmod +x mvnw
-#          ./mvnw test
+      #      - name : Run tests
+      #        run: |
+      #          chmod +x mvnw
+      #          ./mvnw test
 
-      - name: Package application
-        run:  |
+      - name : Package application
+        run: |
           chmod +x mvnw
           ./mvnw clean package -DskipTests
