@@ -1,6 +1,4 @@
-# MyRecipe_API
-
-[![Java CI](https://github.com/ZilanBAL/MyRecipe_API/actions/workflows/ci.yml/badge.svg)](https://github.com/ZilanBAL/MyRecipe_API/actions/workflows/ci.yml)
+# MyRecipe_API [![Java CI](https://github.com/ZilanBAL/MyRecipe/actions/workflows/ci.yml/badge.svg)](https://github.com/ZilanBAL/MyRecipe/actions/workflows/ci.yml)
 
 Une API REST pour gérer vos recettes et leurs ingrédients.
 
