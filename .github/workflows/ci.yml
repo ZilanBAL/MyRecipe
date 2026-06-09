@@ -20,10 +20,10 @@ jobs:
           java-version: 25
           cache: maven
 
-      #      - name : Run tests
-      #        run: |
-      #          chmod +x mvnw
-      #          ./mvnw test
+#      - name : Run tests
+#        run: |
+#          chmod +x mvnw
+#          ./mvnw test
 
       - name : Package application
         run: |
@@ -65,3 +65,21 @@ jobs:
 
       - name: Push image
         run: docker push ${{secrets.DOCKER_USERNAME}}/myrecipe-api:${{github.sha}}
+
+  deploy:
+    runs-on: ubuntu-lastest
+    needs: docker-push
+
+    steps:
+      - name: Deploy on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{secret.SERVER_HOST}}
+          username: ${{secret.SERVER_USER}}
+          key: ${{secret.SERVER_SSH_KEY}}
+          script: |
+            docker login -u ${{secret.DOCKER_USERNAME}} -p ${{secret.DOCKER_TOKEN}}
+            docker pull ${{secret.DOCKER_USERNAME}}/myrecipe-api:${{github.sha}}
+            docker stop myrecipe-api || true
+            docker rm myrecipe-api || true
+            docker compose up -d
