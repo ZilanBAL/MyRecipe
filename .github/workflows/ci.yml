@@ -67,7 +67,7 @@ jobs:
         run: docker push ${{secrets.DOCKER_USERNAME}}/myrecipe-api:${{github.sha}}
 
   deploy:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     needs: docker-push
 
     steps:
