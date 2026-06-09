@@ -57,14 +57,14 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{secrets.DOCKER_USERNAME}}
-          password: ${{secrets.DOCKER_TOKEN}}
+          username: ${{secretss.DOCKER_USERNAME}}
+          password: ${{secretss.DOCKER_TOKEN}}
 
       - name: Build image
-        run: docker build -t ${{secrets.DOCKER_USERNAME}}/myrecipe-api:${{github.sha}} .
+        run: docker build -t ${{secretss.DOCKER_USERNAME}}/myrecipe-api:${{github.sha}} .
 
       - name: Push image
-        run: docker push ${{secrets.DOCKER_USERNAME}}/myrecipe-api:${{github.sha}}
+        run: docker push ${{secretss.DOCKER_USERNAME}}/myrecipe-api:${{github.sha}}
 
   deploy:
     runs-on: ubuntu-lastest
@@ -74,12 +74,12 @@ jobs:
       - name: Deploy on server
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{secret.SERVER_HOST}}
-          username: ${{secret.SERVER_USER}}
-          key: ${{secret.SERVER_SSH_KEY}}
+          host: ${{secrets.SERVER_HOST}}
+          username: ${{secrets.SERVER_USER}}
+          key: ${{secrets.SERVER_SSH_KEY}}
           script: |
-            docker login -u ${{secret.DOCKER_USERNAME}} -p ${{secret.DOCKER_TOKEN}}
-            docker pull ${{secret.DOCKER_USERNAME}}/myrecipe-api:${{github.sha}}
+            docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_TOKEN}}
+            docker pull ${{secrets.DOCKER_USERNAME}}/myrecipe-api:${{github.sha}}
             docker stop myrecipe-api || true
             docker rm myrecipe-api || true
             docker compose up -d
