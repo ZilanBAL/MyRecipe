@@ -91,7 +91,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/chexkout@v4
+        uses: actions/checkout@v4
 
       - name: Copy docker-compose.yml
         uses: garygrossgarten/github-action-ssh@release
