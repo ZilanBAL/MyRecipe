@@ -90,6 +90,18 @@ jobs:
     needs: docker-push
 
     steps:
+      - name: Checkout code
+        uses: actions/chexkout@v4
+
+      - name: Copy docker-compose.yml
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          local: docker-compose.yml
+          remote: /opt/myrecipe/docker-compose.yml
+          host: ${{secrets.SERVER_HOST}}
+          username: ${{secrets.SERVER_USER}}
+          privatKey: ${{secrets.SERVER_SSH_KEY}}
+          
       - name: Deploy on server
         uses: garygrossgarten/github-action-ssh@release
         with:
